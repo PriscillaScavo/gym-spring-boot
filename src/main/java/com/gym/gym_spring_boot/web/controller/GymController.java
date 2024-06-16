@@ -27,6 +27,13 @@ public class GymController {
         model.addAttribute("gyms", gyms );
         return "gyms-list";
     }
+    @GetMapping("/gyms/{gymId}")
+    public String gymDetail(@PathVariable("gymId") long gymId, Model model) {
+        GymDto gymDto = gymService.findGymById(gymId);
+        model.addAttribute("gym", gymDto);
+        return "gyms-detail";
+    }
+
     @GetMapping("/gyms/new")
     public String createGymForm(Model model) {
         Gym gym = new Gym();

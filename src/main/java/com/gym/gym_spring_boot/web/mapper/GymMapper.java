@@ -3,6 +3,10 @@ package com.gym.gym_spring_boot.web.mapper;
 import com.gym.gym_spring_boot.web.models.Gym;
 import com.gym.gym_spring_boot.web.dto.GymDto;
 
+import java.util.stream.Collectors;
+
+import static com.gym.gym_spring_boot.web.mapper.ActivityMapper.mapToActivityDto;
+
 public class GymMapper {
     public static Gym mapToGym(GymDto gymDto){
         Gym gym = Gym.builder()
@@ -24,6 +28,7 @@ public class GymMapper {
                 .photoUrl(gym.getPhotoUrl())
                 .createdOn(gym.getCreatedOn())
                 .updatedOn(gym.getUpdatedOn())
+                .activities(gym.getActivities().stream().map(activity -> mapToActivityDto(activity)).collect(Collectors.toList()))
                 .build();
         return gymDto;
     }

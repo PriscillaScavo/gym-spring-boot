@@ -1,6 +1,7 @@
 package com.gym.gym_spring_boot.web.service.impl;
 
 import com.gym.gym_spring_boot.web.dto.ActivityDto;
+import com.gym.gym_spring_boot.web.mapper.ActivityMapper;
 import com.gym.gym_spring_boot.web.models.Activity;
 import com.gym.gym_spring_boot.web.models.Gym;
 import com.gym.gym_spring_boot.web.repository.ActivityRepository;
@@ -36,8 +37,8 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public List<ActivityDto> findAllActivities() {
-        List<Activity> activitys = activityRepository.findAll();
-        return activitys.stream().map(activity -> mapToActivityDto(activity)).collect(Collectors.toList());
+        List<Activity> activities = activityRepository.findAll();
+        return activities.stream().map(ActivityMapper::mapToActivityDto).collect(Collectors.toList());
     }
 
     @Override

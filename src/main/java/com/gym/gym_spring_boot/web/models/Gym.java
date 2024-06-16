@@ -9,6 +9,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,7 +27,8 @@ public class Gym {
     private String photoUrl;
     @CreationTimestamp
     private LocalDateTime createdOn;
-
     @UpdateTimestamp
     private LocalDateTime updatedOn;
+    @OneToMany(mappedBy = "gym", cascade = CascadeType.REMOVE)
+    private List<Activity> activities = new ArrayList<>();
 }
