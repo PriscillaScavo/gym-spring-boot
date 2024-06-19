@@ -5,7 +5,7 @@ import com.gym.gym_spring_boot.web.dto.ActivityDto;
 import java.util.List;
 
 public interface ActivityService {
-    void createActivity(Long clubId, ActivityDto activityDto);
+    void createActivity(Long gymId, ActivityDto activityDto);
     List<ActivityDto> findAllActivities();
     ActivityDto findByActivityId(Long activityId);
     void updateActivity(ActivityDto activityDto);

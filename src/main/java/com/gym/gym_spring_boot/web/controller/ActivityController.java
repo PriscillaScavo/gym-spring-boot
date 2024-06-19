@@ -2,8 +2,11 @@ package com.gym.gym_spring_boot.web.controller;
 
 import com.gym.gym_spring_boot.web.dto.ActivityDto;
 import com.gym.gym_spring_boot.web.models.Activity;
+import com.gym.gym_spring_boot.web.models.UserEntity;
+import com.gym.gym_spring_boot.web.security.SecurityUtil;
 import com.gym.gym_spring_boot.web.service.ActivityService;
 import com.gym.gym_spring_boot.web.service.GymService;
+import com.gym.gym_spring_boot.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,23 +23,38 @@ public class ActivityController {
 
     private ActivityService activityService;
     private GymService gymService;
-
+    private UserService userService;
     @Autowired
-    public ActivityController(ActivityService activityService) {
+    public ActivityController(ActivityService activityService, UserService userService) {
         this.activityService = activityService;
+        this.userService = userService;
     }
 
     @GetMapping("/activities")
     public String activityList(Model model) {
+        UserEntity user = new UserEntity();
         List<ActivityDto> activities = activityService.findAllActivities();
+        String username = SecurityUtil.getSessionUser();
+        if(username != null) {
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
         model.addAttribute("activities", activities);
+        model.addAttribute("user", user);
         return "activities-list";
     }
 
     @GetMapping("/activities/{activityId}")
     public String viewActivities(@PathVariable("activityId")Long activityId, Model model) {
+        UserEntity user = new UserEntity();
         ActivityDto activityDto = activityService.findByActivityId(activityId);
+        String username = SecurityUtil.getSessionUser();
+        if(username != null) {
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
         model.addAttribute("gym", activityDto.getGym());
+        model.addAttribute("user", user);
         model.addAttribute("activity", activityDto);
         return "activities-detail";
     }

@@ -9,7 +9,7 @@ public interface GymService {
     List<GymDto> findAllGyms();
     Gym saveGym(GymDto gymDto);
     GymDto findGymById(Long gymId);
-    void updateGym(GymDto club);
+    void updateGym(GymDto gym);
     void delete(Long gymId);
     List<GymDto> searchGyms(String query);
 }

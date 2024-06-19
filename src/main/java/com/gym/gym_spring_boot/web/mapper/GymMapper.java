@@ -14,6 +14,7 @@ public class GymMapper {
                 .name(gymDto.getName())
                 .address(gymDto.getAddress())
                 .photoUrl(gymDto.getPhotoUrl())
+                .createdBy(gymDto.getCreatedBy())
                 .createdOn(gymDto.getCreatedOn())
                 .updatedOn(gymDto.getUpdatedOn())
                 .build();
@@ -26,6 +27,7 @@ public class GymMapper {
                 .name(gym.getName())
                 .address(gym.getAddress())
                 .photoUrl(gym.getPhotoUrl())
+                .createdBy(gym.getCreatedBy())
                 .createdOn(gym.getCreatedOn())
                 .updatedOn(gym.getUpdatedOn())
                 .activities(gym.getActivities().stream().map(activity -> mapToActivityDto(activity)).collect(Collectors.toList()))

@@ -1,5 +1,6 @@
 package com.gym.gym_spring_boot.web.dto;
 
+import com.gym.gym_spring_boot.web.models.UserEntity;
 import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,6 +19,7 @@ public class GymDto {
     @NotEmpty(message = "Gym address should not be empty")
     private String address;
     private String photoUrl;
+    private UserEntity createdBy;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
     private List<ActivityDto> activities;

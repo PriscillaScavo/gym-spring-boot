@@ -23,7 +23,11 @@
                     <div class="position-relative mb-3">
                         <img class="img-fluid rounded-3 mb-3" th:src="${gym.photoUrl}" alt="..." />
                         <a th:text="${gym.name}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!">Project name</a>
-            </div>
+                    </div>
+                    <a class="btn btn-primary" th:href="@{/gyms/{gymId}(gymId=${gym.id})}">View</a>
+                    <div th:if="${user.id} == ${gym.createdBy.id}">
+                        <a class="btn btn-primary" th:href="@{/gyms/{gymId}/edit(gymId=${gym.id})}">Edit</a>
+                    </div>
             </div>
         </div>
 

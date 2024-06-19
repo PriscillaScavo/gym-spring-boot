@@ -19,6 +19,9 @@
             <a th:text="${activity.name}" class="h3 fw-bolder text-decoration-none link-dark stretched-link" href="#!"></a>
           </div>
           <a th:href="@{/activities/{activityId}(activityId=${activity.id})}" class="btn btn-primary">View</a>
+          <div th:if="${user.id} == ${activity.gym.createdBy.id}">
+            <a th:href="@{/activities/{activityId}/edit(activityId=${activity.id})}" class="btn btn-primary">Edit</a>
+          </div>
         </div>
       </div>
     </div>

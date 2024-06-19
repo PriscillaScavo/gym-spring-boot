@@ -29,6 +29,9 @@ public class Gym {
     private LocalDateTime createdOn;
     @UpdateTimestamp
     private LocalDateTime updatedOn;
+    @ManyToOne
+    @JoinColumn(name = "created_by", nullable = false)
+    private UserEntity createdBy;
     @OneToMany(mappedBy = "gym", cascade = CascadeType.REMOVE)
     private List<Activity> activities = new ArrayList<>();
 }

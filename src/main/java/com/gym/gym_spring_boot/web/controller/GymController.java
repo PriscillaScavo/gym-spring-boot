@@ -2,7 +2,10 @@ package com.gym.gym_spring_boot.web.controller;
 
 import com.gym.gym_spring_boot.web.dto.GymDto;
 import com.gym.gym_spring_boot.web.models.Gym;
+import com.gym.gym_spring_boot.web.models.UserEntity;
+import com.gym.gym_spring_boot.web.security.SecurityUtil;
 import com.gym.gym_spring_boot.web.service.GymService;
+import com.gym.gym_spring_boot.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,21 +18,36 @@ import java.util.List;
 @Controller
 public class GymController {
     private GymService gymService;
-
+    private UserService userService;
     @Autowired
-    public GymController(GymService gymService) {
+    public GymController(GymService gymService, UserService userService) {
+        this.userService = userService;
         this.gymService = gymService;
     }
 
     @GetMapping("/gyms")
     public String listGym(Model model) {
+        UserEntity user = new UserEntity();
         List<GymDto> gyms = gymService.findAllGyms();
+        String username = SecurityUtil.getSessionUser();
+        if(username != null) {
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+        model.addAttribute("user", user);
         model.addAttribute("gyms", gyms );
         return "gyms-list";
     }
     @GetMapping("/gyms/{gymId}")
     public String gymDetail(@PathVariable("gymId") long gymId, Model model) {
+        UserEntity user = new UserEntity();
         GymDto gymDto = gymService.findGymById(gymId);
+        String username = SecurityUtil.getSessionUser();
+        if(username != null) {
+            user = userService.findByUsername(username);
+            model.addAttribute("user", user);
+        }
+        model.addAttribute("user", user);
         model.addAttribute("gym", gymDto);
         return "gyms-detail";
     }

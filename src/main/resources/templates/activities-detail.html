@@ -27,6 +27,9 @@
             <div class="small text-muted" th:text="${activity.createdOn}"></div>
             <h2 class="card-title">About this activity</h2>
             <p class="card-text" th:text="${activity.type}"></p>
+            <div th:if="${user.id} == ${activity.gym.createdBy.id}">
+              <a class="btn btn-primary" th:href="@{/activities/{activityId}/delete(activityId=${activity.id})}">Delete</a>
+            </div>
         </div>
       </div>
       <!-- Side widgets-->

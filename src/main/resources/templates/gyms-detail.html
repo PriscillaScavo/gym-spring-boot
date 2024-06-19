@@ -27,8 +27,12 @@
             <div class="card-body">
               <div class="small text-muted" th:text="${gym.createdOn}"></div>
               <h2 class="card-title">About this gym</h2>
-              <a class="btn btn-primary" th:href="@{/clubs/{clubId}/delete(clubId=${gym.id})}">Delete</a>
-              <a class="btn btn-primary" th:href="@{/activities/{clubId}/new(clubId=${gym.id})}">Create Activity</a>
+              <a class="btn btn-primary" th:href="@{/gyms/{gymId}/delete(gymId=${gym.id})}">Delete</a>
+              <a class="btn btn-primary" th:href="@{/activities/{gymId}/new(gymId=${gym.id})}">Create Activity</a>
+              <div th:if="${user.id} == ${gym.createdBy.id}">
+                <a class="btn btn-primary" th:href="@{/gyms/{gymId}/delete(gymId=${gym.id})}">Delete</a>
+                <a class="btn btn-primary" th:href="@{/activities/{gymId}/new(gymId=${gym.id})}">Create Activity</a>
+              </div>
               </div>
             </div>
           </div>
